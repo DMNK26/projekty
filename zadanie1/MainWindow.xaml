@@ -1,0 +1,40 @@
+﻿<Window x:Class="zadanie1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:zadanie1"
+        mc:Ignorable="d"
+        Title="MainWindow" Name="thisWindow" Height="472" Width="384">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <StackPanel>
+        <StackPanel.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="White" Offset="0.42"/>
+                <GradientStop Color="#FFECE30B" Offset="1"/>
+            </LinearGradientBrush>
+        </StackPanel.Background>
+        <TextBlock Text="Podaj Imię:" TextAlignment="Center" FontSize="20" FontFamily="Lucida Console" Margin="10"/>
+        
+        <TextBox Name="textBoxImie" Text="{Binding ElementName=thisWindow, Path=FirstName}" Background="LightGray" FontSize="16"/>
+        
+        <TextBlock Name="textBlockErrorName" Foreground="Red" FontSize="15"/>
+        <TextBlock Text="Podaj Wiek:" TextAlignment="Center" FontSize="20" FontFamily="Lucida Console" Margin="10"/>
+
+        <TextBox Name="textBoxWiek" Text="{Binding ElementName=thisWindow, Path=Age}" Background="LightGray" FontSize="16"/>
+        
+        <TextBlock Name="textBlockErrorAge" Foreground="Red" FontSize="15"/>
+        <Button Content="Wyślij (bez bindowania)" FontSize="15" FontStyle="Italic" Click="Button_Click" Margin="0 10 0 0"/>
+        <Button Content="Wyślij (z bindowaniem)" FontSize="15" FontStyle="Italic" Click="Button_Click_Bind" Margin="0 10 0 0"/>
+        
+        <TextBlock Name="textBlockSummary" FontSize="15"/>
+        <TextBlock Name="textBlockAge" FontSize="15"/>
+        <TextBlock Name="textBlockPelnoletnosc" FontSize="15"/>
+
+    </StackPanel>
+</Window>

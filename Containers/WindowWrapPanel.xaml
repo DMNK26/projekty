@@ -1,0 +1,17 @@
+﻿<Window x:Class="Containers.WindowWrapPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Containers"
+        mc:Ignorable="d"
+        Title="WindowWrapPanel" Height="286" Width="526">
+    <WrapPanel Orientation="Vertical">
+        <Button Content="Pierwszy przycisk"/>
+        <Button Content="Drugi przycisk"/>
+        <Button Content="Trzeci przycisk" Width="200px"/>
+        <Button Content="Czwarty przycisk" Height="200px"/>
+        <Button Content="Piąty przycisk"/>
+        <Button Content="Szósty przycisk"/>
+    </WrapPanel>
+</Window>
