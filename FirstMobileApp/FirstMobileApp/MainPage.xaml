@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FirstMobileApp.MainPage">
+
+    <StackLayout BindingContext="{x:Reference rotationSlider}">
+        <Frame BackgroundColor="LightSteelBlue" Padding="24" CornerRadius="0">
+            <Label Text="Fortnite" HorizontalTextAlignment="Center" TextColor="Black" FontSize="36"/>
+        </Frame>
+        <Label Text="{Binding Value, StringFormat='Smoa jest obrócony o {0:N0} stopni.'}"
+               FontSize="20" TextColor="White"
+               HorizontalOptions="Center"/>
+        <Slider Maximum="360" x:Name="rotationSlider"/>
+        <Label/>
+        <Label Text="Smoa ----->" 
+               Rotation="50" HorizontalOptions="Center"
+               FontSize="20" TextColor="White"/>
+        <Label/>
+        <Image Source="icon.png" 
+               Rotation="{Binding Source={x:Reference rotationSlider}, Path=Value}" />
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:todolistapp="clr-namespace:ToDoListApp"
+             x:Class="ToDoListApp.MainPage"
+             x:Name="thisPage">
+    <ContentPage.BindingContext>
+        <todolistapp:MainVM/>
+    </ContentPage.BindingContext>
+    <StackLayout>
+        <Frame BackgroundColor="Gray" Padding="24" CornerRadius="0">
+            <Label Text="Lista do zrobienia" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Label Text="Nowe zadanie:" FontSize="30"/>
+        <StackLayout Orientation="Horizontal">
+            <Entry Text="{Binding Description}" Placeholder="Opis zadania" FontSize="30" 
+                   ClearButtonVisibility="WhileEditing"
+                   HorizontalOptions="Center"/>
+            <Button Text="Dodaj" Command="{Binding AddNewTaskCommand}"/>
+        </StackLayout>
+        
+        <Label Text="Do zrobienia: " FontSize="45" Margin="0, 30" TextColor="Blue"/>
+        <ListView ItemsSource="{Binding TasksCollection}" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout RadioButtonGroup.SelectedValue="{Binding IsSelected}">
+                            <Label Text="{Binding Source={x:Reference thisPage}, Path=BindingContext.Description}" FontSize="20"/>
+                            <Label Text="Ukończone?"/>
+                            <RadioButton Content="W trakcie realizacji" Value="Tak" GroupName="IsCompleted"/>
+                            <RadioButton Content="Zakończone" Value="Nie" GroupName="IsCompleted"/>
+                            <Button Text="Usuń"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Label Text="Usunięte: " FontSize="45" Margin="0, 30" TextColor="Red"/>
+        <ListView>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label/> 
+                            <Label/> 
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

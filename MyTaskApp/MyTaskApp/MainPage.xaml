@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:mytaskapp="clr-namespace:MyTaskApp"
+             x:Class="MyTaskApp.MainPage">
+    <ContentPage.BindingContext>
+        <mytaskapp:MainVM/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <StackLayout>
+            <Label Text="Latarka:" HorizontalOptions="Center" FontSize="20"/>
+            <Button Text="Włącz" Command="{Binding SetOnCommand}" HorizontalOptions="Center"/>
+            <Button Text="Wyłącz" Command="{Binding SetOffCommand}" HorizontalOptions="Center"/>
+
+            <Label Text="Geolokalizacja:" FontSize="20"/>
+            <Button Text="Pobierz" Command="{Binding Location}"/>
+            <Label Text="Szerokość:"/>
+            <Label Text="{Binding Latitude}"/>
+            <Label Text="Długość:"/>
+            <Label Text="{Binding Longitude}"/>
+            <Label Text="Wysokość:"/>
+            <Label Text="{Binding Altitude}"/>
+
+            <Label Text="Wibracje: " FontSize="20"/>
+            <Button Text="~~~" Command="{Binding Vibrate}"/>
+
+            <Label Text="Screenshot" FontSize="20"/>
+            <Button Text="Zrób" Command="{Binding MakeScreenshot}"/>
+            <Image Source="{Binding ShowScreenshot}"/>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
