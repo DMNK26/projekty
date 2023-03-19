@@ -8,6 +8,7 @@
         <todolistapp:MainVM/>
     </ContentPage.BindingContext>
     <StackLayout>
+        
         <Frame BackgroundColor="Gray" Padding="24" CornerRadius="0">
             <Label Text="Lista do zrobienia" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
@@ -19,31 +20,38 @@
             <Button Text="Dodaj" Command="{Binding AddNewTaskCommand}"/>
         </StackLayout>
         
+        
+        
+        
         <Label Text="Do zrobienia: " FontSize="45" Margin="0, 30" TextColor="Blue"/>
         <ListView ItemsSource="{Binding TasksCollection}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout RadioButtonGroup.SelectedValue="{Binding IsSelected}">
+                        <StackLayout RadioButtonGroup.GroupName="{Binding TaskDesc}" RadioButtonGroup.SelectedValue="{Binding IsEnded}">
                             <Label Text="{Binding Source={x:Reference thisPage}, Path=BindingContext.Description}" FontSize="20"/>
                             <Label Text="Ukończone?"/>
-                            <RadioButton Content="W trakcie realizacji" Value="Tak" GroupName="IsCompleted"/>
-                            <RadioButton Content="Zakończone" Value="Nie" GroupName="IsCompleted"/>
-                            <Button Text="Usuń"/>
+                            <RadioButton Content="W trakcie realizacji" Value="W trakcie realizacji"/>
+                            <RadioButton Content="Zakończone" Value="Zakończone"/>
+                            <Button Text="Usuń" Command="{Binding Source={x:Reference thisPage}, Path=BindingContext.DeleteTaskCommand}" CommandParameter="{Binding}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
+        
+        
+        
         <Label Text="Usunięte: " FontSize="45" Margin="0, 30" TextColor="Red"/>
-        <ListView>
+        <ListView ItemsSource="{Binding DeletedTasksCollection}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
-                            <Label/> 
-                            <Label/> 
+                            <Label Text="{Binding Source={x:Reference thisPage}, Path=BindingContext.DeletedDescription}" FontSize="25"/> 
+                            <Label Text="Status zadania" FontSize="20"/>
+                            <Label Text="{Binding Source={x:Reference thisPage}, Path=BindingContext.DeletedSelectedValueRadio}" FontSize="15"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

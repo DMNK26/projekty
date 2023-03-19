@@ -19,11 +19,24 @@ namespace ToDoListApp
         public string Description
         {
             get { return _description; }
-            set
-            {
-                _description = value;
-            }
+            set { _description = value; }
         }
+
+        private string _deletedDescription;
+        public string DeletedDescription
+        {
+            get { return _deletedDescription; }
+            set { _deletedDescription = value; }
+        }
+
+        private string _deletedSelectedValueRadio;
+        public string DeletedSelectedValueRadio
+        {
+            get { return _deletedSelectedValueRadio; }
+            set { _deletedSelectedValueRadio = value; }
+        }
+
+
 
         private ICommand _addNewTaskCommand;
         public ICommand AddNewTaskCommand
@@ -43,9 +56,33 @@ namespace ToDoListApp
             }
         }
 
+
+        private ICommand _deleteTaskCommand;
+        public ICommand DeleteTaskCommand
+        {
+            get
+            {
+                if (_deleteTaskCommand == null)
+                    _deleteTaskCommand = new Command<Task>(
+                        o =>
+                        {
+                            Task deleteTask = new Task();
+                            DeletedDescription = o.TaskDesc;
+                            DeletedSelectedValueRadio = o.IsEnded;
+                            if (DeletedSelectedValueRadio == null)
+                                DeletedSelectedValueRadio = "Nie zaznaczono";
+                            DeletedTasksCollection.Add(deleteTask);
+                            TasksCollection.Remove(o);
+                        }
+                        );
+                return _deleteTaskCommand;
+            }
+        }
+
         public MainVM()
         {
             TasksCollection = new ObservableCollection<Task>();
+            DeletedTasksCollection = new ObservableCollection<Task>();
         }
 	}
 }

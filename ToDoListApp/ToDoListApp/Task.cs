@@ -8,6 +8,6 @@ namespace ToDoListApp
     class Task : BindableObject
     {
         public string TaskDesc { get; set; }
-        public bool IsEnded { get; set; }
+        public string IsEnded { get; set; }
     }
 }
