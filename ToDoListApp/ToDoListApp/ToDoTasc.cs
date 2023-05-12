@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace ToDoListApp
 {
-    class Task : BindableObject
+    class ToDoTasc : BindableObject
     {
         public string TaskDesc { get; set; }
         public string IsEnded { get; set; }

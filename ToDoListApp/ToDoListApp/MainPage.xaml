@@ -29,7 +29,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout RadioButtonGroup.GroupName="{Binding TaskDesc}" RadioButtonGroup.SelectedValue="{Binding IsEnded}">
-                            <Label Text="{Binding Source={x:Reference thisPage}, Path=BindingContext.Description}" FontSize="20"/>
+                            <Label Text="{Binding TaskDesc}" FontSize="20"/>
                             <Label Text="Ukończone?"/>
                             <RadioButton Content="W trakcie realizacji" Value="W trakcie realizacji"/>
                             <RadioButton Content="Zakończone" Value="Zakończone"/>
@@ -49,9 +49,9 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
-                            <Label Text="{Binding Source={x:Reference thisPage}, Path=BindingContext.DeletedDescription}" FontSize="25"/> 
+                            <Label Text="{Binding TaskDesc}" FontSize="25"/> 
                             <Label Text="Status zadania" FontSize="20"/>
-                            <Label Text="{Binding Source={x:Reference thisPage}, Path=BindingContext.DeletedSelectedValueRadio}" FontSize="15"/>
+                            <Label Text="{Binding IsEnded}" FontSize="15"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

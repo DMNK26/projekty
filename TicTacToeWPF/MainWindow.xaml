@@ -23,7 +23,12 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Wynik:" Grid.Column="1" 
+            <Button Content="RESET BOARD" Command="{Binding ResetBoardCommand}"
+                    Grid.Column="0" 
+                    Height="100" Width="200" 
+                    Background="Red" FontSize="36" FontFamily="Agency FB"/>
+            
+            <TextBlock Text="Score:" Grid.Column="1" 
                        FontSize="60" Foreground="White"  FontFamily="Agency FB"
                        VerticalAlignment="Top" HorizontalAlignment="Center"/>
             <TextBlock Text="O:" Grid.Column="1" 
@@ -42,26 +47,18 @@
                        FontSize="64" Foreground="White"  FontFamily="Agency FB"
                        HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,70,0"/>
 
-            <Button Content="RESET WYNIKU" Command="{Binding ResetScoreCommand}"
+            <Button Content="RESET SCORE" Command="{Binding ResetScoreCommand}"
                     Grid.Column="2" 
                     Height="100" Width="200" 
                     Background="Red" FontSize="36" FontFamily="Agency FB"/>
+            
         </Grid>
 
         <ItemsControl ItemsSource="{Binding BoardList}" Grid.Row="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                    <Grid local:GridHelpers.ColumnCount="{Binding ColumnCount}"
+                      local:GridHelpers.RowCount="{Binding RowCount}">
                     </Grid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>

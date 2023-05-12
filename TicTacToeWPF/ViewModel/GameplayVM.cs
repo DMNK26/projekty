@@ -12,87 +12,54 @@ using UtilitiesWPF;
 
 namespace TicTacToeWPF.ViewModel
 {
-    internal class GameplayVM: ObserverVM
+    internal class GameplayVM : ObserverVM
     {
         public ObservableCollection<FieldDescription> BoardList { get; set; }
-       
+
+        private int _columnCount = 3;
+        public int ColumnCount
+        {
+            get { return _columnCount; }
+            set
+            {
+                _columnCount = value;
+                OnPropertyChanged(nameof(ColumnCount));
+            }
+        }
+
+
+        private int _rowCount = 3;
+        public int RowCount
+        {
+            get { return _rowCount; }
+            set
+            {
+                _rowCount = value;
+                OnPropertyChanged(nameof(RowCount));
+            }
+        }
+
         public GameplayVM()
         {
             BoardList = new ObservableCollection<FieldDescription>();
-            BoardList.Add(new FieldDescription()
+            int i = 0;
+            for (int c = 0; c < ColumnCount; c++)
             {
-                Name = "",
-                Index = 0,
-                ColIndex = 0,
-                RowIndex = 0,
-                Command = SetCommand
-                
-            });
-            BoardList.Add(new FieldDescription()
-            {
-                Name = "",
-                Index = 1,
-                RowIndex = 0,
-                ColIndex = 1,
-                Command = SetCommand
-            });
-            BoardList.Add(new FieldDescription()
-            {
-                Name = "",
-                Index = 2,
-                RowIndex = 0,
-                ColIndex = 2,
-                Command = SetCommand
-            });
-            BoardList.Add(new FieldDescription()
-            {
-                Name = "",
-                Index = 3,
-                RowIndex = 1,
-                ColIndex = 0,
-                Command = SetCommand
-            });
-            BoardList.Add(new FieldDescription()
-            {
-                Name = "",
-                Index = 4,
-                RowIndex = 1,
-                ColIndex = 1,
-                Command = SetCommand
-            });
-            BoardList.Add(new FieldDescription()
-            {
-                Name = "",
-                Index = 5,
-                RowIndex = 1,
-                ColIndex = 2,
-                Command = SetCommand
-            });
-            BoardList.Add(new FieldDescription()
-            {
-                Name = "",
-                Index = 6,
-                RowIndex = 2,
-                ColIndex = 0,
-                Command = SetCommand
-            });
-            BoardList.Add(new FieldDescription()
-            {
-                Name = "",
-                Index = 7,
-                RowIndex = 2,
-                ColIndex = 1,
-                Command = SetCommand
-            });
-            BoardList.Add(new FieldDescription()
-            {
-                Name = "",
-                Index = 8,
-                RowIndex = 2,
-                ColIndex = 2,
-                Command = SetCommand
-                
-            });
+                int r = 0;
+                do
+                {
+                    BoardList.Add(new FieldDescription()
+                    {
+                        Name = "",
+                        Index = i,
+                        RowIndex = r,
+                        ColIndex = c,
+                        Command = SetCommand
+                    });
+                    r++;
+                    i++;
+                } while (r != ColumnCount);
+            }          
         }
 
         public bool currentPlayer = true;
@@ -162,12 +129,12 @@ namespace TicTacToeWPF.ViewModel
                             {
                                 if (DrawCheck())
                                 {
-                                    MessageBox.Show("Remis");
+                                    MessageBox.Show("Draw");
                                     ResetBoard(o);
-                                }   
+                                }
                             }
 
-                            currentPlayer = !currentPlayer;   
+                            currentPlayer = !currentPlayer;
                         }
                         ,
                         o =>
@@ -190,8 +157,20 @@ namespace TicTacToeWPF.ViewModel
                 (BoardList[3].Name != "" && BoardList[3].Name == BoardList[4].Name && BoardList[4].Name == BoardList[5].Name) ||
                 (BoardList[6].Name != "" && BoardList[6].Name == BoardList[7].Name && BoardList[7].Name == BoardList[8].Name))
                 return true;
-             else 
+            else
                 return false;
+
+            //for (int i = 0; i < RowCount; i++)
+            //{
+            //    string[] query = BoardList.Where(o => o.RowIndex == i && o.Name.Equals(currentPlayer));
+            //    int elements = query.Count();
+            //    if (elements == 3)
+            //    {
+            //        return true;
+            //    }
+            //}
+
+            //return false;
         }
 
         private bool ButtonsInColumns()
@@ -229,13 +208,32 @@ namespace TicTacToeWPF.ViewModel
 
         private void ResetBoard(FieldDescription field)
         {
-            for(int i = 0; i < BoardList.Count; i++)
+            for (int i = 0; i < BoardList.Count; i++)
             {
                 field.Name = "";
                 BoardList[i].Name = field.Name;
             }
         }
-    }
 
+        private ICommand _resetBoardCommand;
+        public ICommand ResetBoardCommand
+        {
+            get
+            {
+                if (_resetBoardCommand == null)
+                    _resetBoardCommand = new RelayCommand<object>(
+                        o =>
+                        {
+                            for (int i = 0; i < BoardList.Count; i++)
+                            {
+                                BoardList[i].Name = "";
+                                continue;
+                            }
+                        }
+                        );
+                return _resetBoardCommand;
+            }
+        }
+    }
 }
 

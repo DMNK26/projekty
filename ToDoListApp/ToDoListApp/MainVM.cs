@@ -11,30 +11,20 @@ namespace ToDoListApp
 {
     internal class MainVM : BindableObject
     {
-        public ObservableCollection<Task> TasksCollection { get; set; }
-        public ObservableCollection<Task> DeletedTasksCollection { get; set; }
+        public ObservableCollection<ToDoTasc> TasksCollection { get; set; }
+        public ObservableCollection<ToDoTasc> DeletedTasksCollection { get; set; }
 
 
         private string _description;
         public string Description
         {
             get { return _description; }
-            set { _description = value; }
+            set { _description = value;
+                OnPropertyChanged();
+            }
         }
 
-        private string _deletedDescription;
-        public string DeletedDescription
-        {
-            get { return _deletedDescription; }
-            set { _deletedDescription = value; }
-        }
-
-        private string _deletedSelectedValueRadio;
-        public string DeletedSelectedValueRadio
-        {
-            get { return _deletedSelectedValueRadio; }
-            set { _deletedSelectedValueRadio = value; }
-        }
+       
 
 
 
@@ -47,7 +37,7 @@ namespace ToDoListApp
                     _addNewTaskCommand = new Command<object>(
                         o =>
                         {
-                            Task thisTask = new Task();
+                            ToDoTasc thisTask = new ToDoTasc();
                             thisTask.TaskDesc = Description;
                             TasksCollection.Add(thisTask);
                         }
@@ -60,17 +50,19 @@ namespace ToDoListApp
         private ICommand _deleteTaskCommand;
         public ICommand DeleteTaskCommand
         {
-            get
+            get  
             {
                 if (_deleteTaskCommand == null)
-                    _deleteTaskCommand = new Command<Task>(
+                    _deleteTaskCommand = new Command<ToDoTasc>(
                         o =>
                         {
-                            Task deleteTask = new Task();
-                            DeletedDescription = o.TaskDesc;
-                            DeletedSelectedValueRadio = o.IsEnded;
-                            if (DeletedSelectedValueRadio == null)
-                                DeletedSelectedValueRadio = "Nie zaznaczono";
+                            ToDoTasc deleteTask = new ToDoTasc();
+                            //DeletedDescription = o.TaskDesc;
+                            deleteTask.TaskDesc = o.TaskDesc;
+                            //DeletedSelectedValueRadio = o.IsEnded;
+                            deleteTask.IsEnded = o.IsEnded;
+                            if (deleteTask.IsEnded == null)
+                                deleteTask.IsEnded = "Nie zaznaczono";
                             DeletedTasksCollection.Add(deleteTask);
                             TasksCollection.Remove(o);
                         }
@@ -81,8 +73,8 @@ namespace ToDoListApp
 
         public MainVM()
         {
-            TasksCollection = new ObservableCollection<Task>();
-            DeletedTasksCollection = new ObservableCollection<Task>();
+            TasksCollection = new ObservableCollection<ToDoTasc>();
+            DeletedTasksCollection = new ObservableCollection<ToDoTasc>();
         }
 	}
 }
