@@ -113,6 +113,7 @@ namespace TicTacToeWPF.ViewModel
                     _setCommand = new RelayCommand<FieldDescription>(
                         o =>
                         {
+                            CurrentPlayerTextBlock = !currentPlayer ? "O" + " move" : "X" + " move";
                             o.Name = currentPlayer ? "O" : "X";
 
                             if (WinnerCheck())
@@ -148,6 +149,16 @@ namespace TicTacToeWPF.ViewModel
             }
         }
 
+        private string _currentPlayerTextBlock = "O move";
+        public string CurrentPlayerTextBlock
+        {
+            get { return _currentPlayerTextBlock; }
+            set
+            {
+                _currentPlayerTextBlock = value;
+                OnPropertyChanged(nameof(CurrentPlayerTextBlock));
+            }
+        }
 
         #region Winning Conditions
 
@@ -162,14 +173,15 @@ namespace TicTacToeWPF.ViewModel
 
             //for (int i = 0; i < RowCount; i++)
             //{
-            //    string[] query = BoardList.Where(o => o.RowIndex == i && o.Name.Equals(currentPlayer));
+            //    IEnumerable<string> query = (IEnumerable<string>)BoardList.Where(o =>o.Name != "" && o.RowIndex == i && o.Name.Equals(currentPlayer));
             //    int elements = query.Count();
             //    if (elements == 3)
             //    {
             //        return true;
             //    }
+            //    else
+            //        continue;
             //}
-
             //return false;
         }
 

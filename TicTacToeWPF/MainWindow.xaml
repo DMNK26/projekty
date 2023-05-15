@@ -23,11 +23,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Content="RESET BOARD" Command="{Binding ResetBoardCommand}"
-                    Grid.Column="0" 
-                    Height="100" Width="200" 
-                    Background="Red" FontSize="36" FontFamily="Agency FB"/>
-            
+            <TextBlock Text="{Binding CurrentPlayerTextBlock}"
+                        FontSize="50" Foreground="White"  FontFamily="Agency FB"
+                       HorizontalAlignment="Center"/>
+
             <TextBlock Text="Score:" Grid.Column="1" 
                        FontSize="60" Foreground="White"  FontFamily="Agency FB"
                        VerticalAlignment="Top" HorizontalAlignment="Center"/>
@@ -50,8 +49,15 @@
             <Button Content="RESET SCORE" Command="{Binding ResetScoreCommand}"
                     Grid.Column="2" 
                     Height="100" Width="200" 
+                    VerticalAlignment="Top"
                     Background="Red" FontSize="36" FontFamily="Agency FB"/>
-            
+
+            <Button Content="RESET BOARD" Command="{Binding ResetBoardCommand}"
+                    Grid.Column="2" 
+                    Height="100" Width="200" 
+                    VerticalAlignment="Bottom"
+                    Background="Red" FontSize="36" FontFamily="Agency FB"/>
+
         </Grid>
 
         <ItemsControl ItemsSource="{Binding BoardList}" Grid.Row="1">

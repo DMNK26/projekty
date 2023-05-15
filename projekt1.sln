@@ -105,7 +105,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05.ToDoListPage", "05.ToDoL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListApp.Android", "ToDoListApp\ToDoListApp.Android\ToDoListApp.Android.csproj", "{311F2E45-FC3F-481F-97D3-98CF03542F04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListApp", "ToDoListApp\ToDoListApp\ToDoListApp.csproj", "{BBA465CC-D2E4-45BF-984E-CF15FE600113}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListApp", "ToDoListApp\ToDoListApp\ToDoListApp.csproj", "{BBA465CC-D2E4-45BF-984E-CF15FE600113}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoWPF", "LottoWPF\LottoWPF.csproj", "{690AFD53-F351-4846-8D8A-1ACD4E887244}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -645,6 +647,18 @@ Global
 		{BBA465CC-D2E4-45BF-984E-CF15FE600113}.Release|iPhone.Build.0 = Release|Any CPU
 		{BBA465CC-D2E4-45BF-984E-CF15FE600113}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{BBA465CC-D2E4-45BF-984E-CF15FE600113}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{690AFD53-F351-4846-8D8A-1ACD4E887244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{690AFD53-F351-4846-8D8A-1ACD4E887244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{690AFD53-F351-4846-8D8A-1ACD4E887244}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{690AFD53-F351-4846-8D8A-1ACD4E887244}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{690AFD53-F351-4846-8D8A-1ACD4E887244}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{690AFD53-F351-4846-8D8A-1ACD4E887244}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{690AFD53-F351-4846-8D8A-1ACD4E887244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{690AFD53-F351-4846-8D8A-1ACD4E887244}.Release|Any CPU.Build.0 = Release|Any CPU
+		{690AFD53-F351-4846-8D8A-1ACD4E887244}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{690AFD53-F351-4846-8D8A-1ACD4E887244}.Release|iPhone.Build.0 = Release|Any CPU
+		{690AFD53-F351-4846-8D8A-1ACD4E887244}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{690AFD53-F351-4846-8D8A-1ACD4E887244}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -698,6 +712,7 @@ Global
 		{39188011-AFFE-4B3F-BF56-939D4CEED3DB} = {AFF48AB7-FD79-49E2-BD33-437E1CFB0BEF}
 		{311F2E45-FC3F-481F-97D3-98CF03542F04} = {39188011-AFFE-4B3F-BF56-939D4CEED3DB}
 		{BBA465CC-D2E4-45BF-984E-CF15FE600113} = {39188011-AFFE-4B3F-BF56-939D4CEED3DB}
+		{690AFD53-F351-4846-8D8A-1ACD4E887244} = {7786DBF7-9F39-4ECE-AF7A-7E30AED46C4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {169F0A10-6B8E-4738-B336-E97EFF1FEB39}
