@@ -22,18 +22,6 @@ namespace TicTacToeWPF.View
                 }
             }
 
-
-        private int _index;
-        public int Index
-        {
-            get { return _index; }
-            set
-            {
-                _index = value;
-                OnPropertyChanged(nameof(Index));
-            }
-        }
-
             public int RowIndex { get; set; }
             public int ColIndex { get; set; }
 

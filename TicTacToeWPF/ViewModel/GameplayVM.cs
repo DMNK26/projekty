@@ -41,25 +41,20 @@ namespace TicTacToeWPF.ViewModel
 
         public GameplayVM()
         {
-            BoardList = new ObservableCollection<FieldDescription>();
-            int i = 0;
-            for (int c = 0; c < ColumnCount; c++)
+            BoardList = new ObservableCollection<FieldDescription>();       
+            for(int i = 0; i < RowCount; i++)
             {
-                int r = 0;
-                do
+                for(int j = 0; j < ColumnCount; j++)
                 {
                     BoardList.Add(new FieldDescription()
                     {
                         Name = "",
-                        Index = i,
-                        RowIndex = r,
-                        ColIndex = c,
+                        RowIndex = i,
+                        ColIndex = j,
                         Command = SetCommand
                     });
-                    r++;
-                    i++;
-                } while (r != ColumnCount);
-            }          
+                }
+            }
         }
 
         public bool currentPlayer = true;
@@ -161,52 +156,66 @@ namespace TicTacToeWPF.ViewModel
         }
 
         #region Winning Conditions
+        
+        private string CurrentPlayerString()
+        {
+            if (currentPlayer)
+                return "O";
+
+            return "X";
+        }
 
         private bool ButtonsInRow()
         {
-            if ((BoardList[0].Name != "" && BoardList[0].Name == BoardList[1].Name && BoardList[1].Name == BoardList[2].Name) ||
-                (BoardList[3].Name != "" && BoardList[3].Name == BoardList[4].Name && BoardList[4].Name == BoardList[5].Name) ||
-                (BoardList[6].Name != "" && BoardList[6].Name == BoardList[7].Name && BoardList[7].Name == BoardList[8].Name))
-                return true;
-            else
-                return false;
-
-            //for (int i = 0; i < RowCount; i++)
-            //{
-            //    IEnumerable<string> query = (IEnumerable<string>)BoardList.Where(o =>o.Name != "" && o.RowIndex == i && o.Name.Equals(currentPlayer));
-            //    int elements = query.Count();
-            //    if (elements == 3)
-            //    {
-            //        return true;
-            //    }
-            //    else
-            //        continue;
-            //}
-            //return false;
+            var query = BoardList.GroupBy(row => row.RowIndex);
+            foreach(var collection in query)
+            {
+                if (collection.All(o => o.Name == CurrentPlayerString()))
+                    return true;
+                
+                
+            }
+            return false;
         }
 
         private bool ButtonsInColumns()
         {
-            if ((BoardList[0].Name != "" && BoardList[0].Name == BoardList[3].Name && BoardList[3].Name == BoardList[6].Name) ||
-                (BoardList[1].Name != "" && BoardList[1].Name == BoardList[4].Name && BoardList[4].Name == BoardList[7].Name) ||
-                (BoardList[2].Name != "" && BoardList[2].Name == BoardList[5].Name && BoardList[5].Name == BoardList[8].Name))
-                return true;
-            else
-                return false;
+            var query = BoardList.GroupBy(row => row.ColIndex);
+            foreach (var collection in query)
+            {
+                if (collection.All(o => o.Name == CurrentPlayerString()))
+                    return true;
+
+
+            }
+            return false;
         }
 
-        private bool ButtonsInDiagonal()
+        private bool ButtonsInCrossLR()
         {
-            if ((BoardList[0].Name != "" && BoardList[0].Name == BoardList[4].Name && BoardList[4].Name == BoardList[8].Name) ||
-                (BoardList[2].Name != "" && BoardList[2].Name == BoardList[4].Name && BoardList[4].Name == BoardList[6].Name))
+            var query = BoardList.Where(cross => cross.RowIndex == cross.ColIndex);
+            if (query.All(o => o.Name == CurrentPlayerString()))
+            { 
+                return true; 
+            }
+
+            return false;
+        }
+
+        private bool ButtonsInCrossRL()
+        {
+            var query = BoardList.Where(cross => cross.ColIndex == (RowCount - cross.RowIndex - 1));
+            if (query.All(o => o.Name == CurrentPlayerString()))
+            {
                 return true;
-            else
-                return false;
+            }
+
+            return false;
         }
 
         public bool WinnerCheck()
         {
-            if (ButtonsInRow() || ButtonsInColumns() || ButtonsInDiagonal())
+            if (ButtonsInRow() || ButtonsInColumns() || ButtonsInCrossLR() || ButtonsInCrossRL())
                 return true;
             else
                 return false;
